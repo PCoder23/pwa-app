@@ -26,7 +26,7 @@ const Main = ({ messages, setPage, fetchData }: MainProps) => {
   const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
     console.log(scrollTop, clientHeight, scrollHeight);
-    if (scrollTop <= clientHeight - scrollHeight + 750 && !isFetching) {
+    if (scrollTop <= clientHeight - scrollHeight + 650 && !isFetching) {
       setIsFetching(true);
       setPage((prevPage) => prevPage + 1);
       fetchData().then(() => setIsFetching(false));

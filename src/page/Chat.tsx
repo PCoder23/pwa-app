@@ -40,7 +40,9 @@ const Chat = () => {
     }, [])
     
     const fetchData = async () => { 
+        console.log(page);
         const res = await getMessages(page)
+        console.log(messages);
         setMessages((prevMessages) => [...prevMessages, ...(res?.chats || [])]);
     }
   return (

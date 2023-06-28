@@ -22,13 +22,14 @@ type MainProps = {
 };
 
 const Main = ({ messages, setPage, fetchData }: MainProps) => {
-    const [threshold, setThreshold] = useState<number>(-600);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-    const { scrollTop} = e.currentTarget;
-    if (scrollTop <= threshold) {
+    const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
+    console.log(scrollTop, clientHeight, scrollHeight);
+    if (scrollTop <= clientHeight - scrollHeight + 750 && !isFetching) {
+      setIsFetching(true);
       setPage((prevPage) => prevPage + 1);
-      fetchData();
-      setThreshold((prevThreshold) => prevThreshold-1000);
+      fetchData().then(() => setIsFetching(false));
     }
 
   };

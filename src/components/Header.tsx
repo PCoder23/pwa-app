@@ -1,15 +1,15 @@
 import { Flex, Text, Avatar } from '@chakra-ui/react'
 import { ArrowBackIcon, EditIcon,Icon } from '@chakra-ui/icons'
-import {FiMoreVertical} from 'react-icons/fi'
+import { FiMoreVertical } from 'react-icons/fi'
+import logo from '../img/image1.png';
 
 type HeaderProps = {
     from: string;
     to: string;
     tripName: string;
-    senderImg: string; 
 }
 
-const Header = ({from,to,tripName,senderImg}:HeaderProps) => {
+const Header = ({from,to,tripName}:HeaderProps) => {
     return (
         <Flex w="100%" flexDir="column">
             <Flex my={4} align="center"  >
@@ -19,7 +19,7 @@ const Header = ({from,to,tripName,senderImg}:HeaderProps) => {
             </Flex>
             
       <Flex w="100%">
-          <Avatar size="lg" name="logo" src={senderImg}>
+          <Avatar size="lg" name="logo" src={logo}>
           </Avatar>  
           <Flex direction="column" mx="5" justify="center">
                     <Text fontSize="sm" >From <Text as="span" fontSize="md" fontWeight="bold">{ from}</Text></Text>

@@ -28,14 +28,12 @@ const Chat = () => {
     const [to, setTo] = useState<string>('')
     const[page,setPage] = useState<number>(0)
     const [tripName, setTripName] = useState<string>('')
-    const [senderImg, setSenderImg] = useState<string>('')
     useEffect(() => { 
         getMessages(0).then((res) => {
-            setMessages(res?.chats || []);
+            setMessages(res?.chats.reverse() || []);
             setFrom(res?.from)
             setTo(res?.to)
             setTripName(res?.name)
-            setSenderImg(res?.chats[0]?.sender?.image)
         })
     }, [])
     
@@ -43,14 +41,14 @@ const Chat = () => {
         console.log(page);
         const res = await getMessages(page)
         console.log(messages);
-        setMessages((prevMessages) => [...prevMessages, ...(res?.chats || [])]);
+        setMessages((prevMessages) => [...prevMessages, ...(res?.chats.reverse() || [])]);
     }
   return (
       <div>
           
           <Flex w="100%" h="100vh" justify="center" align="center" bg="#FAF9F4" >
               <Flex w={["100%","100%","40%"]} h="95%" flexDir="column" align="center" mx={4}  >
-                  <Header from={from} to={to} tripName={tripName} senderImg={ senderImg} />
+                  <Header from={from} to={to} tripName={tripName}  />
                   <Divider />
                   {messages.length ? <Main messages={messages} setPage={setPage} fetchData={ fetchData} /> : <CircularProgress />}
                   <Divider />

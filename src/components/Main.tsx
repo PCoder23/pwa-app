@@ -1,4 +1,5 @@
-import { Avatar, Flex ,Text} from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Flex, Icon, Text } from "@chakra-ui/react";
+import { FcApproval } from "react-icons/fc";
 import {  useState } from "react";
 
 type senderType = {
@@ -25,8 +26,7 @@ const Main = ({ messages, setPage, fetchData }: MainProps) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
-    console.log(scrollTop, clientHeight, scrollHeight);
-    if (scrollTop <= clientHeight - scrollHeight + 650 && !isFetching) {
+    if (scrollTop <= clientHeight - scrollHeight + 450 && !isFetching) {
       setIsFetching(true);
       setPage((prevPage) => prevPage + 1);
       fetchData().then(() => setIsFetching(false));
@@ -60,9 +60,16 @@ const Main = ({ messages, setPage, fetchData }: MainProps) => {
             <Flex key={index} w="100%">
               <Avatar
                 name="Computer"
-                src="https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+                src={message.sender.image}
                 bg="blue.300"
-              ></Avatar>
+              >{message.sender.is_kyc_verified && (
+                  <AvatarBadge boxSize=".9em" bg="white" border="transparent" >
+                    <Icon as={FcApproval} boxSize=".8em" color="blue" />
+                </AvatarBadge>
+              )
+                
+              }
+              </Avatar>
               <Flex
                 bg="white"
                 color="#606060"
